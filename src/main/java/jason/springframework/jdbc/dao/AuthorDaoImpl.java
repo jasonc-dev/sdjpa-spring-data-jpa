@@ -2,10 +2,12 @@ package jason.springframework.jdbc.dao;
 
 import jason.springframework.jdbc.domain.Author;
 import jason.springframework.jdbc.repositories.AuthorRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by jt on 8/28/21.
@@ -17,6 +19,11 @@ public class AuthorDaoImpl implements AuthorDao {
 
     public AuthorDaoImpl(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
+    }
+
+    @Override
+    public List<Author> findAllAuthorsByLastName(String lastName, Pageable pageable) {
+        return null;
     }
 
     @Override
