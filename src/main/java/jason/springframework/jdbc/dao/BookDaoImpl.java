@@ -2,6 +2,7 @@ package jason.springframework.jdbc.dao;
 
 import jason.springframework.jdbc.domain.Book;
 import jason.springframework.jdbc.repositories.BookRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,6 +16,11 @@ public class BookDaoImpl implements BookDao {
 
     public BookDaoImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
+    }
+
+    @Override
+    public List<Book> findAllBooks(Pageable pageable) {
+        return null;
     }
 
     @Override
