@@ -10,6 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,6 +24,17 @@ public class DaoIntegrationTest {
 
     @Autowired
     BookRepository bookRepository;
+
+    @Test
+    void testBookStream() {
+        AtomicInteger counter = new AtomicInteger();
+
+        bookRepository.findAllByTitleNotNull().forEach(book -> {
+            counter.incrementAndGet();
+        });
+
+        assertThat(counter.get()).isGreaterThan(5);
+    }
 
     @Test
     void testEmptyResultException() {
